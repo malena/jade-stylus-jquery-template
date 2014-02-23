@@ -1,7 +1,9 @@
 jade-stylus-jquery-template
 ===========================
 
-This is an html template that uses Grunt to compile Jade, Stylus. Includes jQuery src.
+This is an html template that uses Grunt to compile Jade and Stylus. 
+Includes jQuery src. 
+Includes Bootstrap src.   
 
 ## Installation
 
