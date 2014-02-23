@@ -3,6 +3,10 @@ jade-stylus-jquery-template
 
 This is an html template that uses Grunt to compile Jade, Stylus. Includes jQuery src.
 
+## Installation
+
+Install Node.js - http://nodejs.org 
+Install Grunt.js - http://gruntjs.com/getting-started 
 
 Install Grunt's Command Line Interface
 
