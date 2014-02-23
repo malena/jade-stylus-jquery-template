@@ -3,47 +3,39 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-		concat: {   
-		    dist: {
-				src: [
-				    'js/libs/*.js', // All JS in the libs folder
-				    'js/global.js'  // This specific file
-				],
-				dest: 'js/production.js',
-		    }
-		},
-
-		uglify : {
-			build: {
-				src: 'js/production.js',
-				dest: 'public/production.min.js' 
-			}
-		},
-
 		watch: {
 			options:{
 				livereload: true,
 			},
 			scripts: {
-				files: ['js/*.js'],
-				tasks: ['concat', 'uglify'],
+				files: ['app/static/project.js'],
+				tasks: ['uglify'],
 				options: {
 					spawn: false,
 				},
 			},
 			css: {
-				files: ['css/*.styl'],
+				files: ['app/static/css/*.styl'],
 				tasks: ['stylus'],
 				options: {
-					spawn: false,
+					livereload: true,
+					spawn: false
 				}
 			},
 			html: {
-				files: ['index.jade'],
+				files: ['app/index.jade'],
 				tasks: ['jade'],
 				options: {
-					spawn: false,
+					livereload: true,
+					spawn: false
 				}
+			}
+		},
+
+		uglify : {
+			build: {
+				src: ['app/static/project.js', 'public/libs/js/*.js'],
+				dest: 'public/dist/project.min.js' 
 			}
 		},
 
@@ -53,7 +45,7 @@ module.exports = function(grunt) {
 			},
 			compile: {
 				files: {
-					'public/global.css' : 'css/global.styl'
+					'public/dist/project.min.css' : 'app/static/css/*.styl'
 				}
 			}
 		},
@@ -66,7 +58,7 @@ module.exports = function(grunt) {
 					}
 				},
 				files: {
-					'index.html' : 'index.jade'
+					'index.html' : 'app/index.jade'
 				}
 			}
 		},
@@ -84,13 +76,12 @@ module.exports = function(grunt) {
 
     // 3. Where we tell Grunt we plan to use this plug-in.
     grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-stylus');
     grunt.loadNpmTasks('grunt-contrib-jade');
     grunt.loadNpmTasks('grunt-contrib-connect');
 
     // 4. Where we tell Grunt what to do when we type "grunt" into the terminal.
-    grunt.registerTask('serve', ['connect', 'concat', 'uglify', 'stylus', 'jade', 'watch']);
+    grunt.registerTask('serve', ['connect', 'uglify', 'stylus', 'jade', 'watch']);
 
 };
